@@ -176,6 +176,13 @@ function findLast(linkedList) {
   return currNode;
 }
 
+function findThirdFromLast(linkedList) {
+  const lastNode = findLast(linkedList);
+  const secondLast = findPrevious(linkedList, lastNode.value);
+  const thirdLast = findPrevious(linkedList, secondLast.value);
+  return thirdLast;
+}
+
 function main() {
   let SLL = new LinkedList();
   SLL.insertLast('Apollo');
@@ -200,6 +207,10 @@ function main() {
   console.log('SLL is empty = ' + isEmpty(SLL));
   console.log(findPrevious(SLL, 'Kat'));
   console.log(findLast(SLL));
+  console.log(findThirdFromLast(SLL));
 }
 
 main();
+
+// The provided mystery program is removing nodes with duplicate values from a linked list.
+// The time complexity is quadratic O(n^2) since there are 2 nested loops.
