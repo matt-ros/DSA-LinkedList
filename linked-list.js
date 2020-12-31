@@ -159,8 +159,8 @@ function findPrevious(linkedList, item) {
     prevNode = currNode;
     currNode = currNode.next;
   }
-  if (currNode === null) {
-    return 'Item not found';
+  if (currNode === null || currNode.value === linkedList.head.value) {
+    return null;
   }
   return prevNode;
 }
@@ -174,6 +174,22 @@ function findLast(linkedList) {
     currNode = currNode.next;
   }
   return currNode;
+}
+
+function reverse(linkedList) {
+  let counter = 1;
+  let listSize = size(linkedList);
+  let currNode = findLast(linkedList);
+  let nextNode = findPrevious(linkedList, currNode.value);
+  while (counter <= listSize) {
+    linkedList.remove(currNode.value);
+    linkedList.insertAt(counter, currNode.value);
+    counter++;
+    currNode = nextNode;
+    nextNode = findPrevious(linkedList, currNode.value);
+
+  }
+  return linkedList;
 }
 
 function findThirdFromLast(linkedList) {
@@ -208,6 +224,7 @@ function main() {
   console.log(findPrevious(SLL, 'Kat'));
   console.log(findLast(SLL));
   console.log(findThirdFromLast(SLL));
+  display(reverse(SLL));
 }
 
 main();
