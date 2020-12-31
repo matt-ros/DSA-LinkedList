@@ -192,6 +192,19 @@ function reverse(linkedList) {
   return linkedList;
 }
 
+function listCycle(linkedList) {
+  let nodes = new Set();
+  let currNode = linkedList.head;
+  while (currNode !== null && !nodes.has(currNode.value)) {
+    nodes.add(currNode.value);
+    currNode = currNode.next;
+  }
+  if (currNode === null) {
+    return false;
+  }
+  return true;
+}
+
 function findThirdFromLast(linkedList) {
   const lastNode = findLast(linkedList);
   const secondLast = findPrevious(linkedList, lastNode.value);
@@ -225,6 +238,13 @@ function main() {
   console.log(findLast(SLL));
   console.log(findThirdFromLast(SLL));
   display(reverse(SLL));
+  let CycleList = new LinkedList();
+  CycleList.insertFirst('first');
+  CycleList.insertFirst('second');
+  CycleList.insertFirst('third');
+  CycleList.head.next.next = CycleList.head;
+  console.log(listCycle(SLL));
+  console.log(listCycle(CycleList));
 }
 
 main();
