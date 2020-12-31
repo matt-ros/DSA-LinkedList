@@ -212,6 +212,19 @@ function findThirdFromLast(linkedList) {
   return thirdLast;
 }
 
+function middleOfList(linkedList) {
+  let front = linkedList.head;
+  let back = findLast(linkedList);
+  while (front.value !== back.value) {
+    if (front.next.value === back.value) {
+      break;
+    }
+    front = front.next;
+    back = findPrevious(linkedList, back.value);
+  }
+  return front.value;
+}
+
 function main() {
   let SLL = new LinkedList();
   SLL.insertLast('Apollo');
@@ -245,6 +258,9 @@ function main() {
   CycleList.head.next.next = CycleList.head;
   console.log(listCycle(SLL));
   console.log(listCycle(CycleList));
+  console.log(middleOfList(SLL));
+  SLL.insertFirst('testVal');
+  console.log(middleOfList(SLL));
 }
 
 main();
